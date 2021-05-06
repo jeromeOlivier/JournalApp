@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+	</head>
+
+	<body>
+<!--		<form action="/read" method="GET">-->
+<!--		<select name="id">-->
+<!--			<option th:each="mmbr : ${myMembers}" th:value="${mmbr.id}"-->
+<!--					th:text="${mmbr.name_first} + ' ' +  ${mmbr.name_last}">-->
+<!--			</option>-->
+<!--		</select>-->
+<!--		</form>-->
+
+<!--			<div class="title">-->
+<!--				<label for="title">Title:</label>-->
+<!--				<input type="text" name="title" id="title" value="title">-->
+<!--			</div>-->
+<!--			<div class="body">-->
+<!--				<label for="body">Entry:</label>-->
+<!--				<textarea name="body" id="body" value="body"></textarea>-->
+<!--				<div>-->
+<!--					<button class="submitButton">Submit</button>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		<div>-->
+			<div th:each="entry : ${journalEntry}">
+				<div colspan="4" th:text="${entry.number} + ' & ' + ${entry.date}">
+				</div>
+				<div th:text="${entry.title}"></div>
+				<div th:text="${entry.body}"></div>
+			</div>
+
+	</body>
+</html>
