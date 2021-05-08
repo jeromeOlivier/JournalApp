@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Journal App</title>
-	</head>
-	<body>
+<head>
+	<meta charset="UTF-8">
+	<title>Journal App</title>
+</head>
+<body>
 
-<!-- TEXT INPUT	-->
+	<!-- TEXT INPUT	-->
 
-		<form action="/add" method="get">
+	<main>
+		<form action="#" th:action="${journalAction}" method="get">
 			<div class="title">
-				<label for="title">Title:</label>
-				<input type="text" name="title" id="title" value="title">
+				<label for="title">
+					<input type="text" name="title" id="title" th:placeholder="${placeholderTitle}"
+						   th:value="${entryTitle}">
+				</label>
 			</div>
+			<input type="hidden" name="entryNumber" th:value="${entryNumber}">
 			<div class="body">
-				<label for="body">Entry:</label>
-				<textarea name="body" id="body" value="body"></textarea>
+				<label for="body">
+					<textarea th:placeholder="${placeholderBody}" name="body" id="body"
+							  th:text="${entryBody}"></textarea>
+				</label>
 				<div>
-					<button>SUBMIT</button>
+					<input type="submit" class="submitButton" value="submit">
 				</div>
 			</div>
 		</form>
+		<form action="/startApp" method="get" id="cancelButton">
+			<label>
+				<input type="submit" class="button" value="cancel">
+			</label>
+		</form>
+
+		<!-- DISPLAY STATISTICS -->
+
 		<div id="statisticsDiv">
 		</div>
 
-<!-- DISPLAY ENTRIES -->
+	</main>
 
+	<!-- DISPLAY ENTRIES -->
+
+	<aside>
 		<table class="ListOfEntries">
-			<tbody th:each="entry : ${journalEntry}">
+			<tbody th:each="entry : ${entryList}">
 				<tr>
 					<td colspan="4" th:text="'Entry: ' + ${entry.number} + ' &sdot; ' + ${entry.date}"></td>
 				</tr>
@@ -38,24 +55,20 @@
 					<td colspan="4" th:text="${entry.body}"></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>
-						<form action="#" th:action="@{/read}" method="get" th:object="${entry}">
-							<input type="submit" th:value="*{number}" name="entryString" value="READ">
-						</form>
-					</td>
+					<td colspan="2"></td>
 					<td>
 						<form action="/edit" method="get" th:object="${entry}">
-							<button th:value="${entry.number}" name="entryNumber">EDIT</button>
+							<button th:value="${entry.number}" class="button" name="entryNumber">edit</button>
 						</form>
 					</td>
 					<td>
-						<form action="#" th:action="@{/delete}" method="get" th:object="${entry}">
-							<input type="submit" th:value="*{number}" name="entryString" value="DELETE">
+						<form action="/delete" method="get" th:object="${entry}">
+							<button th:value="${entry.number}" class="button" name="entryNumber">delete</button>
 						</form>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-	</body>
+	</aside>
+</body>
 </html>
