@@ -11,11 +11,11 @@ public class JournalEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     int number; // auto generate increment
-    Date date;
+    String date;
     String title;
     String body;
 
-    public JournalEntry(String title, Date date, String body) {
+    public JournalEntry(String title, String date, String body) {
         this.title = title;
         this.date = date;
         this.body = body;
@@ -28,7 +28,7 @@ public class JournalEntry {
         return number;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -40,7 +40,7 @@ public class JournalEntry {
         return body;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

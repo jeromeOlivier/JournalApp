@@ -1,0 +1,16 @@
+body {
+    color: #fff;
+    display: grid;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: grid;
+    background: #428181;
+}
+
+aside {
+    display: grid;
+    background: #A56564;
+}

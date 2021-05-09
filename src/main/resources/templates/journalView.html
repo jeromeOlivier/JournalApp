@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/style.css">
 	<title>Journal App</title>
 </head>
 <body>
 
 	<!-- TEXT INPUT	-->
-
 	<main>
 		<form action="#" th:action="${journalAction}" method="get">
 			<div class="title">
@@ -34,19 +34,17 @@
 		</form>
 
 		<!-- DISPLAY STATISTICS -->
-
 		<div id="statisticsDiv">
 		</div>
 
 	</main>
 
 	<!-- DISPLAY ENTRIES -->
-
 	<aside>
 		<table class="ListOfEntries">
 			<tbody th:each="entry : ${entryList}">
 				<tr>
-					<td colspan="4" th:text="'Entry: ' + ${entry.number} + ' &sdot; ' + ${entry.date}"></td>
+					<td colspan="4" th:text="${entry.date}"></td>
 				</tr>
 				<tr>
 					<td colspan="4" th:text="${entry.title}"></td>
