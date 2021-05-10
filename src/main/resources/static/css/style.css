@@ -1,16 +1,126 @@
-body {
+/* GENERAL AREA & LAYOUT */
+
+:root {
     color: #fff;
-    display: grid;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+body {
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-columns: 1fr .6666fr;
+    height: 100vh;
+}
+
+hr {
+    height: 1px;
+    background: #fff;
+    border: none;
+    margin-top: 5pt;
 }
 
 main {
-    display: grid;
     background: #428181;
+    padding: 1% 7%;
 }
 
 aside {
-    display: grid;
     background: #A56564;
+    overflow: auto;
+    padding: 1% 11%;
+}
+
+aside::-webkit-scrollbar, textarea::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Safari */
+}
+
+/* INTERACTIVE ELEMENTS */
+
+.button, .submitButton {
+    font-weight: 700;
+    color: inherit;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button {
+    font-size: .8rem;
+}
+
+.submitButton {
+    font-size: 1rem;
+}
+
+.inlineButton {
+    display: inline;
+}
+
+/* TYPOGRAPHY LABELS AND BUTTONS */
+
+.label {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/* TYPOGRAPHY INPUTS */
+
+#title {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+textarea, input {
+    font-family: "Source Sans Pro", sans-serif;
+    color: #fff;
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    resize: none;
+}
+
+textarea {
+    font-size: 2rem;
+    font-weight: 500;
+    min-height: 66vh;
+}
+
+/* TYPOGRAPHY PREVIOUS JOURNAL DISPLAYS */
+
+table {
+    padding: 0;
+    margin: 0;
+}
+
+tbody {
+    padding: 2rem 0;
+}
+.journalDate {
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.journalTitle {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.journalBody {
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.lastRow {
+    padding-top: .5rem;
+    padding-bottom: 2rem;
+    margin-right: 1rem;
+    text-align: right;
 }

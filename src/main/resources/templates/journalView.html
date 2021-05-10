@@ -3,33 +3,38 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/type.css">
 	<title>Journal App</title>
 </head>
 <body>
 
 	<!-- TEXT INPUT	-->
 	<main>
-		<form action="#" th:action="${journalAction}" method="get">
+		<form action="#" th:action="${journalAction}" method="get" id="gridItem01">
 			<div class="title">
+				<p class="label">Title</p>
+				<hr>
 				<label for="title">
 					<input type="text" name="title" id="title" th:placeholder="${placeholderTitle}"
-						   th:value="${entryTitle}">
+						   th:value="${entryTitle}" autofocus>
 				</label>
 			</div>
 			<input type="hidden" name="entryNumber" th:value="${entryNumber}">
 			<div class="body">
+				<p class="label">Journal Entry</p>
+				<hr>
 				<label for="body">
 					<textarea th:placeholder="${placeholderBody}" name="body" id="body"
 							  th:text="${entryBody}"></textarea>
 				</label>
-				<div>
-					<input type="submit" class="submitButton" value="submit">
-				</div>
+			</div>
+			<div class="inlineButton">
+				<input type="submit" class="submitButton" value="SUBMIT">
 			</div>
 		</form>
-		<form action="/startApp" method="get" id="cancelButton">
+		<form class="inlineButton" action="/startApp" method="get" id="cancelButton">
 			<label>
-				<input type="submit" class="button" value="cancel">
+				<input type="button" class="button" value="CANCEL">
 			</label>
 		</form>
 
@@ -41,32 +46,34 @@
 
 	<!-- DISPLAY ENTRIES -->
 	<aside>
-		<table class="ListOfEntries">
-			<tbody th:each="entry : ${entryList}">
-				<tr>
-					<td colspan="4" th:text="${entry.date}"></td>
-				</tr>
-				<tr>
-					<td colspan="4" th:text="${entry.title}"></td>
-				</tr>
-				<tr>
-					<td colspan="4" th:text="${entry.body}"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td>
-						<form action="/edit" method="get" th:object="${entry}">
-							<button th:value="${entry.number}" class="button" name="entryNumber">edit</button>
-						</form>
-					</td>
-					<td>
-						<form action="/delete" method="get" th:object="${entry}">
-							<button th:value="${entry.number}" class="button" name="entryNumber">delete</button>
-						</form>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<p class="label">Previous Entries</p>
+		<hr>
+<!--		<div class="scrollWindow">-->
+			<table class="ListOfEntries" id="gridItem02">
+				<tbody th:each="entry : ${entryList}">
+					<tr>
+						<td class="journalDate" th:text="${entry.date}"></td>
+					</tr>
+					<tr>
+						<td class="journalTitle" th:text="${entry.title}"></td>
+					</tr>
+					<tr>
+						<td class="journalBody" th:text="${entry.body}"></td>
+					</tr>
+					<tr>
+
+						<td class="lastRow">
+							<form class="inlineButton" action="/edit" method="get" th:object="${entry}">
+								<button th:value="${entry.number}" class="button" name="entryNumber">EDIT</button>
+							</form>
+							<form class="inlineButton" action="/delete" method="get" th:object="${entry}">
+								<button th:value="${entry.number}" class="button" name="entryNumber">DELETE</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+<!--		</div>-->
 	</aside>
 </body>
 </html>

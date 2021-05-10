@@ -3,6 +3,7 @@ package com.example.journalApp.subD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
 import java.util.Locale;
 import java.util.Optional;
 
@@ -21,13 +23,7 @@ public class JournalController {
 
     @GetMapping("/startApp")
     public String listPreviousEntries(ModelMap model) {
-        Object entryList = journalRepository.findAll(Sort.by("number").descending());
-        model.addAttribute("entryList", entryList)
-             .addAttribute("journalAction", "/add")
-             .addAttribute("entryTitle", "")
-             .addAttribute("entryBody", "")
-             .addAttribute("placeholderTitle", "Title")
-             .addAttribute("placeholderBody", "Entry");
+        journalAppReset(model);
         return "journalView";
     }
 
@@ -41,16 +37,10 @@ public class JournalController {
                                         .format(now));
         String dateTime = date + " @ " + time;
         journalEntry.setDate(dateTime);
-        journalEntry.setTitle(title);
+        journalEntry.setTitle(title.toUpperCase(Locale.ROOT));
         journalEntry.setBody(body);
         journalRepository.save(journalEntry);
-        Object entryList = journalRepository.findAll(Sort.by("number").descending());
-        model.addAttribute("entryList", entryList)
-             .addAttribute("journalAction", "/add")
-             .addAttribute("entryTitle", "")
-             .addAttribute("entryBody", "")
-             .addAttribute("placeholderTitle", "Title")
-             .addAttribute("placeholderBody", "Entry");
+        journalAppReset(model);
         return "journalView";
     }
 
@@ -62,8 +52,7 @@ public class JournalController {
             Object entryList = journalRepository.findAll(Sort.by("number").descending());
             model.addAttribute("entryTitle", journalEntry.title)
                  .addAttribute("entryBody", journalEntry.body)
-                 .addAttribute("placeholderTitle", "Title")
-                 .addAttribute("placeholderBody", "Entry")
+                 .addAttribute("entryNumber", journalEntry.number)
                  .addAttribute("entryList", entryList)
                  .addAttribute("journalAction", "/update");
             return "journalView";
@@ -79,19 +68,13 @@ public class JournalController {
         Optional<JournalEntry> searchResult = journalRepository.findById(entryNumber);
         if (searchResult.isPresent()) {
             JournalEntry journalEntry = searchResult.get();
-            journalEntry.setTitle(title);
+            journalEntry.setTitle(title.toUpperCase(Locale.ROOT));
             journalEntry.setBody(body);
             journalRepository.save(journalEntry);
         } else {
             return "noEntryFound";
         }
-        Object entryList = journalRepository.findAll(Sort.by("number").descending());
-        model.addAttribute("entryList", entryList)
-             .addAttribute("journalAction", "/add")
-             .addAttribute("entryTitle", "")
-             .addAttribute("entryBody", "")
-             .addAttribute("placeholderTitle", "Title")
-             .addAttribute("placeholderBody", "Entry");
+        journalAppReset(model);
         return "journalView";
     }
 
@@ -104,13 +87,16 @@ public class JournalController {
         } else {
             return "noEntryFound";
         }
+        journalAppReset(model);
+        return "journalView";
+    }
+
+    public ModelMap journalAppReset(ModelMap model) {
         Object entryList = journalRepository.findAll(Sort.by("number").descending());
         model.addAttribute("entryList", entryList)
              .addAttribute("journalAction", "/add")
              .addAttribute("entryTitle", "")
-             .addAttribute("entryBody", "")
-             .addAttribute("placeholderTitle", "Title")
-             .addAttribute("placeholderBody", "Entry");
-        return "journalView";
+             .addAttribute("entryBody", "");
+        return model;
     }
 }

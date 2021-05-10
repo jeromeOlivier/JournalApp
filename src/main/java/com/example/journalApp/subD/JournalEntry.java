@@ -1,9 +1,6 @@
 package com.example.journalApp.subD;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -13,6 +10,7 @@ public class JournalEntry {
     int number; // auto generate increment
     String date;
     String title;
+    @Column(length=5000)
     String body;
 
     public JournalEntry(String title, String date, String body) {
