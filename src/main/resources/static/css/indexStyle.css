@@ -1,0 +1,74 @@
+/* GENERAL AREA & LAYOUT */
+
+:root {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    color: #fff;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+root::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+hr {
+    height: 1px;
+    background: #fff;
+    border: none;
+    margin-top: 5pt;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 33.33vh auto;
+    grid-template-rows: 33.33vh auto;
+    height: 100vh;
+}
+
+.index01 {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    background: #875590;
+}
+
+.index02 {
+    background: #5A4A7D;
+}
+
+.index03 {
+    background: #66467D;
+}
+
+.index04 {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    background: #A38240;
+}
+
+.quoteBox {
+    width: 66%;
+}
+
+.quote {
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+button {
+    font-weight: 700;
+    font-size: 1rem;
+    color: inherit;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/appStyle.css">
 	<link rel="stylesheet" href="../css/type.css">
 	<title>Journal App</title>
 </head>
@@ -10,7 +10,7 @@
 
 	<!-- TEXT INPUT	-->
 	<main>
-		<form action="#" th:action="${journalAction}" method="get" id="gridItem01">
+		<form action="#" th:action="${journalAction}" method="post" id="gridItem01">
 			<div class="title">
 				<p class="label">Title</p>
 				<hr>
@@ -32,9 +32,9 @@
 				<input type="submit" class="submitButton" value="SUBMIT">
 			</div>
 		</form>
-		<form class="inlineButton" action="/startApp" method="get" id="cancelButton">
+		<form class="inlineButton" action="/startApp" method="post" id="cancelButton">
 			<label>
-				<input type="button" class="button" value="CANCEL">
+				<input type="submit" class="button" value="CANCEL">
 			</label>
 		</form>
 
@@ -46,34 +46,32 @@
 
 	<!-- DISPLAY ENTRIES -->
 	<aside>
-		<p class="label">Previous Entries</p>
-		<hr>
-<!--		<div class="scrollWindow">-->
-			<table class="ListOfEntries" id="gridItem02">
-				<tbody th:each="entry : ${entryList}">
-					<tr>
-						<td class="journalDate" th:text="${entry.date}"></td>
-					</tr>
-					<tr>
-						<td class="journalTitle" th:text="${entry.title}"></td>
-					</tr>
-					<tr>
-						<td class="journalBody" th:text="${entry.body}"></td>
-					</tr>
-					<tr>
+		<p class="label padMarginLeft">Previous Entries</p>
+		<hr class="padMarginLeft">
+		<table class="ListOfEntries" id="gridItem02">
+			<tbody th:each="entry : ${entryList}">
+				<tr>
+					<td class="journalDate" th:text="${entry.date}"></td>
+				</tr>
+				<tr>
+					<td class="journalTitle" th:text="${entry.title}"></td>
+				</tr>
+				<tr>
+					<td class="journalBody" th:text="${entry.body}"></td>
+				</tr>
+				<tr>
 
-						<td class="lastRow">
-							<form class="inlineButton" action="/edit" method="get" th:object="${entry}">
-								<button th:value="${entry.number}" class="button" name="entryNumber">EDIT</button>
-							</form>
-							<form class="inlineButton" action="/delete" method="get" th:object="${entry}">
-								<button th:value="${entry.number}" class="button" name="entryNumber">DELETE</button>
-							</form>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-<!--		</div>-->
+					<td class="lastRow">
+						<form class="inlineButton" action="/edit" method="post" th:object="${entry}">
+							<button th:value="${entry.number}" class="button" name="entryNumber">EDIT</button>
+						</form>
+						<form class="inlineButton" action="/delete" method="post" th:object="${entry}">
+							<button th:value="${entry.number}" class="button" name="entryNumber">DELETE</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</aside>
 </body>
 </html>

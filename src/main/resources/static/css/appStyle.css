@@ -35,6 +35,16 @@ aside::-webkit-scrollbar, textarea::-webkit-scrollbar {
     display: none; /* Hide scrollbar Safari */
 }
 
+root::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+aside {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 /* INTERACTIVE ELEMENTS */
 
 .button, .submitButton {
@@ -95,19 +105,21 @@ textarea {
 /* TYPOGRAPHY PREVIOUS JOURNAL DISPLAYS */
 
 table {
-    padding: 0;
+    padding: .5rem 0;
     margin: 0;
 }
 
 tbody {
     padding: 2rem 0;
 }
+
 .journalDate {
     font-size: 1rem;
     font-weight: 200;
 }
 
 .journalTitle {
+    text-transform: uppercase;
     font-size: 1rem;
     font-weight: 700;
 }
@@ -116,6 +128,7 @@ tbody {
     font-size: 1rem;
     font-weight: 300;
     font-style: italic;
+    white-space: pre-wrap;
 }
 
 .lastRow {
@@ -123,4 +136,8 @@ tbody {
     padding-bottom: 2rem;
     margin-right: 1rem;
     text-align: right;
+}
+
+.padMarginLeft {
+    margin-left: .25rem;
 }
