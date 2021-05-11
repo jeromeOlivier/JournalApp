@@ -58,16 +58,20 @@ hr {
 }
 
 .quote {
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: 300;
     font-style: italic;
 }
 
+.author {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
 button {
-    font-weight: 700;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 3rem;
     color: inherit;
-    text-decoration: underline;
     background: none;
     border: none;
     cursor: pointer;

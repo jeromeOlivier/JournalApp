@@ -1,19 +1,13 @@
 package com.example.journalApp.subD;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.ui.ModelMap;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
-public class JournalDefaults {
+public class JournalTimeStamp {
 
-    @Autowired
-    JournalRepository journalRepository;
-
+    // this is the function that generates the date and time stamp
     public static String currentDateTime() {
         LocalDateTime now = LocalDateTime.now();
         String date = (DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<!-- TEXT INPUT	-->
+	<!-- TEXT INPUT	FIELDS -->
 	<main>
 		<form action="#" th:action="${journalAction}" method="post" id="gridItem01">
 			<div class="title">
@@ -38,13 +38,13 @@
 			</label>
 		</form>
 
-		<!-- DISPLAY STATISTICS -->
+		<!-- DISPLAY STATISTICS (NOT IMPLEMENTED) -->
 		<div id="statisticsDiv">
 		</div>
 
 	</main>
 
-	<!-- DISPLAY ENTRIES -->
+	<!-- DISPLAY ENTRIES TEMPLATE POPULATED BY DATABASE -->
 	<aside>
 		<p class="label padMarginLeft">Previous Entries</p>
 		<hr class="padMarginLeft">
@@ -60,7 +60,6 @@
 					<td class="journalBody" th:text="${entry.body}"></td>
 				</tr>
 				<tr>
-
 					<td class="lastRow">
 						<form class="inlineButton" action="/edit" method="post" th:object="${entry}">
 							<button th:value="${entry.number}" class="button" name="entryNumber">EDIT</button>

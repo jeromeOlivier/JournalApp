@@ -15,28 +15,28 @@ public class JournalController {
     @Autowired
     JournalRepository journalRepository;
 
+    // when the app starts-up, or user hits cancel, the app does a reset.
     @RequestMapping(value = "/startApp", method = RequestMethod.POST)
     public String listPreviousEntries(ModelMap model) {
         journalAppReset(model);
         return "journalView";
     }
 
+    // when the user submits a new entry, the function saves it to the repository before doing a reset
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addEntry(String title, String body, ModelMap model) {
-        if (body.equals("")) {
-            journalAppReset(model);
-            return "journalView";
-        } else {
+        if (!body.equals("")) {
             JournalEntry journalEntry = new JournalEntry();
-            journalEntry.setDate(JournalDefaults.currentDateTime());
+            journalEntry.setDate(JournalTimeStamp.currentDateTime());
             journalEntry.setTitle(title);
             journalEntry.setBody(body);
             journalRepository.save(journalEntry);
-            journalAppReset(model);
-            return "journalView";
         }
+        journalAppReset(model);
+        return "journalView";
     }
 
+    // when user requests to update an entry, it loads in the textarea to allow for editing, changes the default action from /add to /update
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editEntry(Integer entryNumber, ModelMap model) {
         Optional<JournalEntry> searchResult = journalRepository.findById(entryNumber);
@@ -54,13 +54,11 @@ public class JournalController {
         }
     }
 
+    // when the user hits submit, the function makes sure the text wasn't deleted, then saves the changes before doing a reset.
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateEntry(Integer entryNumber, String title,
                               String body, ModelMap model) {
-        if (body.equals("")) {
-            journalAppReset(model);
-            return "journalView";
-        } else {
+        if (!body.equals("")) {
             Optional<JournalEntry> searchResult = journalRepository.findById(entryNumber);
             if (searchResult.isPresent()) {
                 JournalEntry journalEntry = searchResult.get();
@@ -70,11 +68,12 @@ public class JournalController {
             } else {
                 return "noEntryFound";
             }
-            journalAppReset(model);
-            return "journalView";
         }
+        journalAppReset(model);
+        return "journalView";
     }
 
+    // when the user selects to delete an entry, the function finds it in the repository and deletes it before before doing a reset.
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteEntry(Integer entryNumber, ModelMap model) {
         Optional<JournalEntry> searchResult = journalRepository.findById(entryNumber);
@@ -88,6 +87,7 @@ public class JournalController {
         return "journalView";
     }
 
+    // this is the "reset" that keeps happening.
     public void journalAppReset(ModelMap model) { // generic reset of the interface
         Object entryList = journalRepository.findAll(Sort.by("number").descending());
         model.addAttribute("entryList", entryList)
